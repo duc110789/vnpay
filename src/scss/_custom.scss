@@ -1,4 +1,39 @@
 // Here you can add other styles
-.title-header {
-    color: red;
+.app-footer {
+	display: none;
 }
+.title-header {
+  color: red;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.btn-search {
+	.btn-primary {
+		color: #fff;
+		background-color: #20a8d8;
+		border-color: #20a8d8;
+		&:hover {
+			background-color: #08779e;
+		}
+	}
+}
+/*Start table*/
+.table-common {
+	thead {
+		th {
+			font-size: 11px;
+			background: #f0f1f2;
+		}
+	}
+	tbody {
+		tr {
+			td {
+				padding: 8px 4px;
+				vertical-align: middle;
+				max-width: 140px;
+			}
+		}
+	}
+}
+/*End table*/
