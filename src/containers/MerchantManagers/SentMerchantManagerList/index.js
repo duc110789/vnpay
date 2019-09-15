@@ -8,8 +8,8 @@ import { Card, CardHeader, CardBody, Row, Col, Input,
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SearchBox from '../../../components/SearchBox';
-import Table from './table';
-import Pagination from '../../../components/Pagination';
+import Table from '../../../components/Table';
+import dataInspection from '../../../MockData/merchantlist';
 
 const nameMerchant = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -31,11 +31,22 @@ class index extends Component {
       isClearable: false,
       phoneNumber: '',
       email: '',
-      startDate: new Date(),
-      count: 0,
-      limit: 10,
-      page: 1,
+      startDate: new Date()
     }
+    this.titleTable = [
+      'STT',
+      'Tên Merchant',
+      'Họ và tên',
+      'Số ĐT',
+      'Tên Thương Hiệu',
+      'Website TMĐT',
+      'Dịch vụ Cổng TT',
+      'Dịch vu VNPAY QR',
+      'Ngày tạo',
+      'User xử lý',
+      'Ngày xử lý',
+      'Tình trạng'
+    ]
   }
 
   handleChange = date => {
@@ -63,8 +74,7 @@ class index extends Component {
   }
   
   render() {
-    const { title, isClearable, phoneNumber, email, startDate, selectedNameMerchant, selectedStatusMerchant,
-      count, limit, page, hasNext } = this.state;
+    const { title, isClearable, phoneNumber, email, startDate, selectedNameMerchant, selectedStatusMerchant } = this.state;
     console.log(this.state)
     return (
       <div className="animated fadeIn">
@@ -162,14 +172,7 @@ class index extends Component {
               </Col>
             </Row>
             <SearchBox />
-            <Table />
-            <Pagination
-              page={page}
-              count={count}
-              pageSize={limit}
-              hasNext={hasNext}
-              onChange={(_page, _limit) => this.setState({ page: _page, limit: _limit })}
-            />
+            <Table rows={dataInspection} headers={this.titleTable} />
           </CardBody>
         </Card>
       </div>
