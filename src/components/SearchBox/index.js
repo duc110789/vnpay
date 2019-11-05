@@ -7,7 +7,7 @@ class SearchBox extends React.Component {
     }
     render() {
         return(
-            <div className="text-center btn-search">
+            <div className="text-right btn-search">
                 <Button
                     className="icon-search btn btn-primary"
                     onClick={this.handleSearch}  

@@ -68,7 +68,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/" to="/merchant/sent-merchant-list" />
                 </Switch>
               </Suspense>
             </Container>

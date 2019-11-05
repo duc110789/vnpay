@@ -3,8 +3,16 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Table
+  Table,
 } from 'reactstrap';
+import Select from 'react-select';
+
+const pageOption = [
+  { value: 10, label: '10' },
+  { value: 20, label: '20' },
+  { value: 50, label: '50' },
+  { value: 100, label: '100' },
+];
 
 class Tables extends Component {
   constructor(props) {
@@ -17,7 +25,8 @@ class Tables extends Component {
       numberRecord: props.numberRecord ? props.numberRecord : 8,
       listPage: [],
       numberPage: 0,
-      currentPage: 1
+      currentPage: 1,
+      selectedPageOption: { value: 10, label: '10' }
     };
   }
 
@@ -74,8 +83,9 @@ class Tables extends Component {
       this.props.selectedRow();
     }
   }
+
   render() {
-    console.log('currentRow:', this.state);
+    const { selectedPageOption } = this.state;
     return (
       <div className="animated fadeIn">
         <Table className="table-common responsive table-bordered mt-4">
@@ -89,48 +99,59 @@ class Tables extends Component {
           <tbody>
             {this.state.currentRow.map((e, index) => (
               <tr key={index} onClick={() => this.selectedRow(e) } style={{ backgroundColor: this.state.rowSelected != null && this.state.currentRow.indexOf(e) === this.state.currentRow.indexOf(this.state.rowSelected) ?  '#D6EEF7' : ''}}>
-                <td className="font-default">{e.column1}</td>
+                <td className="font-default text-center">{e.column1}</td>
                 <td className="font-default">{e.column2}</td>
                 <td className="font-default">{e.column3}</td>
                 <td className="font-default">{e.column4}</td>
                 <td className="font-default">{e.column5}</td>
                 <td className="font-default">{e.column6}</td>
-                <td className="font-default">{e.column7}</td>
-                <td className="font-default">{e.column8}</td>
-                <td className="font-default">{e.column9}</td>
-                <td className="font-default">{e.column10}</td>
-                <td className="font-default">{e.column11}</td>
-                <td className="font-default">{e.column12}</td>
-                {
-                  this.props.haveDetail && 
-                  <td className="text-center table-edit"><button className="btn btn-primary text-white" onClick={() => this.props.gotoDetail()}>{e.column8}</button></td>
-                }
               </tr>
             ))}
           </tbody>
         </Table>
-        <div className="d-flex flex-row-reverse">
-          <Pagination>
-            {
-              this.state.numberPage > 1 && (
-              <PaginationItem>
-                <PaginationLink previous onClick={() => this.handlePreviousPage()} tag="button" />
-              </PaginationItem>
-              )
-            }
-            {this.state.listPage.map((e, index) => (
-              <PaginationItem key={index} active={this.state.currentPage === e+1 ? true : false}>
-                <PaginationLink tag="button" onClick={() => this.handleChangePage(e+1)} className="font-default">{e +1}</PaginationLink>
-              </PaginationItem>
-            ))}
-            {
-              this.state.numberPage > 1 && (
-              <PaginationItem>
-                <PaginationLink onClick={() => this.handleNextPage()} next tag="button" />
-              </PaginationItem>
-              )
-            }
-          </Pagination>
+        <div className="Pagination-container">
+          <div className="page-per-size pag-left">
+            <span>Hiển thị</span>
+              <Select
+                id="LIMIT_DROPDOWN"
+                value={selectedPageOption}
+                onChange={(e) => {
+                  this.setState({
+                    selectedPageOption: e,
+                    page: 1,
+                  });
+                }}
+                options={pageOption}
+                placeholder="10"
+                className="select-pagination"
+                menuPlacement="top"
+              />
+              <span>bản ghi</span> |
+              <div className="d-inline-block ml-1">Hiển thị từ <strong>1</strong> đến <strong>10</strong> của <strong>12</strong> bản ghi</div>
+            </div>
+          <div className="pag-right">
+            <Pagination>
+              {
+                this.state.numberPage > 1 && (
+                <PaginationItem>
+                  <PaginationLink previous onClick={() => this.handlePreviousPage()} tag="button" />
+                </PaginationItem>
+                )
+              }
+              {this.state.listPage.map((e, index) => (
+                <PaginationItem key={index} active={this.state.currentPage === e+1 ? true : false}>
+                  <PaginationLink tag="button" onClick={() => this.handleChangePage(e+1)} className="font-default">{e +1}</PaginationLink>
+                </PaginationItem>
+              ))}
+              {
+                this.state.numberPage > 1 && (
+                <PaginationItem>
+                  <PaginationLink onClick={() => this.handleNextPage()} next tag="button" />
+                </PaginationItem>
+                )
+              }
+            </Pagination>
+          </div>
         </div>
       </div>
     );

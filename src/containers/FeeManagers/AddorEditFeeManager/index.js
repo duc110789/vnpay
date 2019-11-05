@@ -21,13 +21,11 @@ const statusMerchant = [
   { value: 'chưa xử lý', label: 'Chưa xử lý' },
   { value: 'đã xử lý', label: 'Đã xử lý' }
 ];
-
-
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'DANH SÁCH MERCHANT GỬI ĐĂNG KÝ',
+      title: 'Thêm mới Merchant',
       selectedNameMerchant: null,
       selectedStatusMerchant: null,
       isClearable: false,
@@ -84,7 +82,7 @@ class index extends Component {
   
   render() {
     const { title, isClearable, phoneNumber, email, startDate, startDate1, selectedNameMerchant, selectedStatusMerchant } = this.state;
-    console.log(this.state)
+    console.log(this.state.selectedNameMerchant)
     return (
       <div className="animated fadeIn">
         <Card>
