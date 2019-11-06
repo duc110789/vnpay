@@ -39,6 +39,7 @@ const User = React.lazy(() => import('./views/Users/User'));
 const AddorEditMerchantManager = React.lazy(() => import('./containers/MerchantManagers/AddorEditMerchantManager'));
 const SentMerchantManagerList = React.lazy(() => import('./containers/MerchantManagers/SentMerchantManagerList'));
 const FeeManagerList = React.lazy(() => import('./containers/FeeManagers/FeeManagerList'));
+const AddFeeManager = React.lazy(() => import('./containers/FeeManagers/AddorEditFeeManager'));
 
 
 
@@ -85,10 +86,10 @@ const routes = [
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/merchant/add-edit-merchant', name: 'Thêm mới Merchant', component: AddorEditMerchantManager},
-  { path: '/merchant/sent-merchant-list', name: 'Danh sách Merchant gửi đăng ký', component: SentMerchantManagerList},
-  { path: '/fee/list', name: 'Quản lý bảng phí', component: FeeManagerList},
-  // { path: '/merchant/sent-merchant-list', name: 'Danh sách Merchant gửi đăng ký', component: SentMerchantManagerList}
+  { path: '/merchant/add-edit-merchant', exact: true, name: 'Thêm mới Merchant', component: AddorEditMerchantManager},
+  { path: '/merchant/sent-merchant-list', exact: true, name: 'Danh sách Merchant gửi đăng ký', component: SentMerchantManagerList},
+  { path: '/fee/list', exact: true, name: 'Quản lý bảng phí', component: FeeManagerList},
+  { path: '/fee/list/add', exact: true, name: 'Add Fee', component: AddFeeManager }
 ];
 
 export default routes;

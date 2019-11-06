@@ -83,6 +83,7 @@ export async function axiosCallApi(endpoint, method = 'get', params, headerParam
       Accept: 'application/json',
       'Content-Type': 'application/json',
       // Authorization: `Bearer ${Auth.getToken()}`,
+      'Access-Control-Allow-Origin': '*',
       ...headerParams,
     },
   };

@@ -9,6 +9,7 @@ import Select from 'react-select';
 import { filterFeeType, pageOption, filterStatus, DEFAULT_PERPAGE } from './config';
 import Table from './Table';
 import { getFeeTables } from '../../apis/fee-manager';
+import axios from 'axios'
 
 class FeeTable extends React.Component {
   constructor(props) {
@@ -21,22 +22,39 @@ class FeeTable extends React.Component {
       currentPage: 1,
       hasNext: 0,
       data: {},
-      totalRow: 0,
+      toRow: 0,
     };
     this.getApiFeeTable = this.getApiFeeTable.bind(this);
+    this.addButtonAction = this.addButtonAction.bind(this);
   }
 
   componentDidMount() {
     this.getApiFeeTable();
   }
 
-  async getApiFeeTable(params={}) {
-    const { status, totalRow } = this.state;
+  async getApiFeeTable(params = {}) {
+    const { status, toRow } = this.state;
     const data = await getFeeTables({
-      totalRow: totalRow,
+      toRow: toRow,
+      status,
       ...params
     });
-    console.log('data', data);
+    // axios.post('http://10.22.7.105:8090/mms/fee/list', {
+    //   toRow,
+    //   status,
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+  }
+
+  
+
+  addButtonAction() {
+    window.location.href = ('/#/fee/list/add');
   }
 
   render() {
@@ -158,6 +176,7 @@ class FeeTable extends React.Component {
               <FormGroup row>
                 <Col className="text-left btn-search">
                   <Button
+                    onClick={this.addButtonAction}
                     className="icon-search btn btn-primary"
                   >
                     <i className="icon-plus" /> Thêm mới

@@ -31,10 +31,9 @@ import { checkPermissions } from './auth';
 
 export function baseUrl(url, params = false) {
   let realBaseUrl = process.env.REACT_APP_BACKEND_HOST;
-  console.log('realBaseUrl1')
+
   if (!realBaseUrl) {
     realBaseUrl = '';
-    console.log('realBaseUrl2')
   }
   if (params) {
     return `${realBaseUrl}/${url}?${querystring.stringify(params)}`;
