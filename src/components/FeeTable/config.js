@@ -1,9 +1,9 @@
-export const DEFAULT_PERPAGE = 10;
+export const DEFAULT_PERPAGE = 5;
 export const pageOption = [
+  { value: 5, label: '5' },
   { value: 10, label: '10' },
   { value: 20, label: '20' },
   { value: 50, label: '50' },
-  { value: 100, label: '100' },
 ];
 export const filterFeeType = [
   {

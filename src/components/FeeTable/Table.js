@@ -1,5 +1,6 @@
 import React from 'react';
 import './table.scss';
+import { Button } from 'reactstrap';
 
 function Table(props) {
   const { tableData } = props;
@@ -17,14 +18,34 @@ function Table(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
+          {
+            tableData && tableData.map((data, index) => (
+              <tr key={data.id}>
+                <td>{index + 1}</td>
+                <td>{data.feeType}</td>
+                <td>{data.classifySigning}</td>
+                <td>{data.countFeeCode}</td>
+                <td>{data.status}</td>
+                <td className="icon-fee">
+                  {
+                    <Button>
+                      <i className="icon-info" />
+                    </Button>
+                  }
+                  {
+                    <Button>
+                      <i className="icon-note" />
+                    </Button>
+                  }
+                  {
+                    <Button>
+                      <i className="icon-lock" />
+                    </Button>
+                  }
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
       {

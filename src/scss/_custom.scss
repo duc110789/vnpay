@@ -87,4 +87,14 @@ ul.nav-dropdown-items {
 .form-submit {
 	width: 100%;
 }
+.icon-fee {
+	button {
+		background-color: inherit;
+		border: 0;
+		padding: 5px;
+		&:hover {
+			background-color: inherit;
+		}
+	}
+}
 /*End manager*/ 

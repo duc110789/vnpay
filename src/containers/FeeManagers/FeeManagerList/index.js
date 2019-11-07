@@ -36,8 +36,8 @@ class FeeManagerList extends React.Component {
           </CardHeader>
           <CardBody>
             <FeeTable
-              tHead={data.fields}
-              tData={data.data}
+              // tHead={data.fields}
+              // tData={data.data}
               changeFeeTable={changeFeeTable}
             />
           </CardBody>

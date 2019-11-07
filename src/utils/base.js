@@ -38,7 +38,7 @@ export function baseUrl(url, params = false) {
   if (params) {
     return `${realBaseUrl}/${url}?${querystring.stringify(params)}`;
   }
-  return `${realBaseUrl}/${url}`;
+  return (`${realBaseUrl}/${url}`);
 }
 
 /**

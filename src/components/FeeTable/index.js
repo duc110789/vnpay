@@ -9,49 +9,72 @@ import Select from 'react-select';
 import { filterFeeType, pageOption, filterStatus, DEFAULT_PERPAGE } from './config';
 import Table from './Table';
 import { getFeeTables } from '../../apis/fee-manager';
-import axios from 'axios'
 
 class FeeTable extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      feeType: '',
-      status: '',
+      classifySigning: 0,
+      feeCode: '',
+      feeType: 0,
+      status: 0,
+      // fromRow: 0,
+      // toRow: 0,
       tData: [],
-      perPage: DEFAULT_PERPAGE,
       currentPage: 1,
-      hasNext: 0,
-      data: {},
-      toRow: 0,
+      perPage: DEFAULT_PERPAGE,
+      totalRow: 0,
+      data: {}
     };
     this.getApiFeeTable = this.getApiFeeTable.bind(this);
     this.addButtonAction = this.addButtonAction.bind(this);
+    this.searchFee = this.searchFee.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount() {
     this.getApiFeeTable();
   }
 
-  async getApiFeeTable(params = {}) {
-    const { status, toRow } = this.state;
-    const data = await getFeeTables({
-      toRow: toRow,
-      status,
-      ...params
-    });
-    // axios.post('http://10.22.7.105:8090/mms/fee/list', {
-    //   toRow,
-    //   status,
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      perPage, currentPage,
+    } = this.state;
+    if (prevState.perPage !== perPage
+      || prevState.currentPage !== currentPage) {
+      this.getApiFeeTable();
+    }
   }
 
-  
+  async getApiFeeTable(params = {}) {
+    const { perPage, currentPage } = this.state;
+    const data = await getFeeTables({
+      toRow: perPage,
+      fromRow: perPage * (currentPage - 1),
+      ...params
+    });
+    this.setState({
+      tData: data.list,
+      totalRow: data.totalRow
+    }, () => {
+      const { tData, currentPage: cur } = this.state;
+      if (tData && tData.length === 0 && cur > 1) {
+        this.setState(prevState => ({
+          currentPage: prevState.currentPage - 1,
+        }), () => {
+          this.getApiFeeTable();
+        });
+      }
+    })
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({ currentPage: pageNumber });
+  }
+
+  searchFee() {
+    console.log('searchFee')
+  }
 
   addButtonAction() {
     window.location.href = ('/#/fee/list/add');
@@ -59,8 +82,8 @@ class FeeTable extends React.Component {
 
   render() {
     const { tHead } = this.props;
-    const { feeType, tData, perPage, currentPage, hasNext, status } = this.state;
-    const showingOption = `Showing ${currentPage * perPage - perPage + 1} - ${(currentPage * perPage) > hasNext  ? hasNext : (currentPage * perPage)} of ${hasNext} records`
+    const { feeType, tData, perPage, currentPage, status, totalRow } = this.state;
+    const showingOption = `Showing ${currentPage * perPage - perPage + 1} - ${(currentPage * perPage) > totalRow ? totalRow : (currentPage * perPage)} of ${totalRow} records`
     return(
       <div>
         <div className="animated fadeIn">
@@ -166,6 +189,7 @@ class FeeTable extends React.Component {
                 <Col className="text-right btn-search">
                   <Button
                     className="icon-search btn btn-primary"
+                    onClick={this.searchFee}
                   >
                     <i className="icon-magnifier" /> Tìm kiếm
                   </Button>
@@ -192,7 +216,8 @@ class FeeTable extends React.Component {
         </div>
         <div className="fee-table__pagination">
           {
-            <Row>
+            tData && tData.length !== 0 && (
+              <Row>
                 <Col xl={{
                     size: 6,
                   }}
@@ -224,7 +249,7 @@ class FeeTable extends React.Component {
                           });
                         }}
                         options={pageOption}
-                        placeholder="10"
+                        placeholder="5"
                         className="select-pagination"
                         menuPlacement="top"
                       />
@@ -252,15 +277,20 @@ class FeeTable extends React.Component {
                   }}
                 >
                   {
-                    <Pagination
-                      activePage={currentPage}
-                      itemsCountPerPage={perPage}
-                      totalItemsCount={hasNext}
-                      pageRangeDisplayed={5}
-                    />
+                    tData && tData.length > 0
+                    && (
+                      <Pagination
+                        activePage={currentPage}
+                        itemsCountPerPage={perPage}
+                        totalItemsCount={totalRow}
+                        pageRangeDisplayed={3}
+                        onChange={this.handlePageChange}
+                      />
+                    )
                   }
                 </Col>
               </Row>
+            )
           }
           {
             tData && tData.length === 0 && <p>Showing 0 - 0 of 0 records</p>
