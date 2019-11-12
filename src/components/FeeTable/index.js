@@ -6,42 +6,47 @@ import {
 } from 'reactstrap';
 import './index.scss';
 import Select from 'react-select';
-import { filterFeeType, pageOption, filterStatus, DEFAULT_PERPAGE } from './config';
+import { pageOption, getFeeType, DEFAULT_PERPAGE, filterFeeType } from './config';
 import Table from './Table';
-import { getFeeTables } from '../../apis/fee-manager';
+import { getFeeTables, getCacheStatusByType } from '../../apis/fee-manager';
+
 
 class FeeTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      classifySigning: 0,
-      feeCode: '',
+      // classifySigning: 0,
+      // feeCode: '',
       feeType: 0,
-      status: 0,
-      // fromRow: 0,
-      // toRow: 0,
+      // status: 0,
       tData: [],
       currentPage: 1,
       perPage: DEFAULT_PERPAGE,
       totalRow: 0,
-      data: {}
+      data: {},
+      // type: ''
     };
     this.getApiFeeTable = this.getApiFeeTable.bind(this);
     this.addButtonAction = this.addButtonAction.bind(this);
     this.searchFee = this.searchFee.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.getFeeType = this.getFeeType.bind(this);
+    // this.getClassifySigning = this.getClassifySigning.bind(this);
+    // this.getFeeStatus = this.getFeeStatus.bind(this);
   }
 
   componentDidMount() {
     this.getApiFeeTable();
+    this.getFeeType();
+    // this.getClassifySigning();
+    // this.getFeeStatus();
   }
 
   componentDidUpdate(prevProps, prevState) {
     const {
       perPage, currentPage,
     } = this.state;
-    if (prevState.perPage !== perPage
-      || prevState.currentPage !== currentPage) {
+    if (prevState.perPage !== perPage || prevState.currentPage !== currentPage) {
       this.getApiFeeTable();
     }
   }
@@ -51,7 +56,7 @@ class FeeTable extends React.Component {
     const data = await getFeeTables({
       toRow: perPage,
       fromRow: perPage * (currentPage - 1),
-      ...params
+      ...params,
     });
     this.setState({
       tData: data.list,
@@ -68,12 +73,35 @@ class FeeTable extends React.Component {
     })
   }
 
+  async getFeeType() {
+    const datas1 = await getCacheStatusByType({
+      type: 'FEE_TYPE', 
+      // type: 'FEE_STATUS'
+    });
+    console.log('datas1', datas1 && datas1.list);
+  }
+
+  // async getClassifySigning(params = {}) {
+  //   const datas2 = await getCacheStatusByType({
+  //     type: 'CLASSIFY_SIGNING',
+  //     ...params
+  //   });
+  // }
+
+  // async getFeeStatus(params = {}) {
+  //   // const { type } = this.state;
+  //   const datas3 = await getCacheStatusByType({
+  //     type: 'FEE_STATUS',
+  //     ...params
+  //   });
+  // }
+
   handlePageChange(pageNumber) {
     this.setState({ currentPage: pageNumber });
   }
 
   searchFee() {
-    console.log('searchFee')
+    this.getApiFeeTable();
   }
 
   addButtonAction() {
@@ -81,7 +109,6 @@ class FeeTable extends React.Component {
   }
 
   render() {
-    const { tHead } = this.props;
     const { feeType, tData, perPage, currentPage, status, totalRow } = this.state;
     const showingOption = `Showing ${currentPage * perPage - perPage + 1} - ${(currentPage * perPage) > totalRow ? totalRow : (currentPage * perPage)} of ${totalRow} records`
     return(
@@ -96,7 +123,7 @@ class FeeTable extends React.Component {
                 <Col lg="7">
                   <Select
                     id="LIMIT_DROPDOWN"
-                    options={filterFeeType}
+                    options={console.log('getFeeType', getFeeType)}
                     placeholder="Tất cả"
                     className="select-pagination select-pagination__top"
                     menuPlacement="bottom"
@@ -120,7 +147,7 @@ class FeeTable extends React.Component {
                 <Col lg="7">
                   <Select
                     id="LIMIT_DROPDOWN"
-                    options={filterFeeType}
+                    // options={filterFeeType}
                     placeholder="Tất cả"
                     className="select-pagination select-pagination__top"
                     menuPlacement="bottom"
@@ -168,7 +195,6 @@ class FeeTable extends React.Component {
                 <Col lg="7">
                   <Select
                     id="LIMIT_DROPDOWN"
-                    options={filterStatus}
                     placeholder="Tất cả"
                     className="select-pagination select-pagination__top"
                     menuPlacement="bottom"
@@ -210,7 +236,7 @@ class FeeTable extends React.Component {
             </Col>
           </Row>
           <Table
-            tHead={tHead}
+            // tHead={tHead}
             tableData={tData}
           />
         </div>
@@ -304,4 +330,5 @@ class FeeTable extends React.Component {
 export default FeeTable;
 FeeTable.propTypes = {
   changeFeeTable: PropTypes.func.isRequired,
+  getFeeType: PropTypes.object.isRequired,
 };
