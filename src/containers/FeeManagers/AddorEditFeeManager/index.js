@@ -49,5 +49,5 @@ class FeeManagerList extends React.Component {
 
 export default FeeManagerList;
 FeeManagerList.propTypes = {
-  changeFeeTable: PropTypes.func.isRequired,
+  // changeFeeTable: PropTypes.func.isRequired,
 };

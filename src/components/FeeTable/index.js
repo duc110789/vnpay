@@ -303,5 +303,5 @@ class FeeTable extends React.Component {
 
 export default FeeTable;
 FeeTable.propTypes = {
-  changeFeeTable: PropTypes.func.isRequired,
+  // changeFeeTable: PropTypes.func.isRequired,
 };

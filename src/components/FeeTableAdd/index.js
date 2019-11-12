@@ -13,6 +13,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { filterFeeType, pageOption, DEFAULT_PERPAGE } from './config';
 import Table from './table';
 
+import { getFreeTableFake } from '../../apis/testFakeApi';
+
 class index extends Component {
   constructor(props) {
     super(props);
@@ -20,12 +22,59 @@ class index extends Component {
       feeType: '',
       status: '',
       tData: [],
+      
       perPage: DEFAULT_PERPAGE,
       currentPage: 1,
       hasNext: 0,
       data: {},
       totalRow: 0,
     }
+  
+    this.getApiFeeTable = this.getApiFeeTable.bind(this);
+  }
+  
+  handleChange(newValue: any, actionMeta: any){
+    console.group('Value Changed');
+    console.log(newValue);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+  }
+  
+  componentDidMount() {
+    const data = this.getApiFeeTable();
+    // console.log(data)
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      perPage, currentPage,
+    } = this.state;
+    if (prevState.perPage !== perPage
+      || prevState.currentPage !== currentPage) {
+      this.getApiFeeTable();
+    }
+  }
+  
+  async getApiFeeTable(params = {}) {
+    const { perPage, currentPage } = this.state;
+    const data = await getFreeTableFake({
+      toRow: perPage,
+      fromRow: perPage * (currentPage - 1),
+      ...params
+    });
+    this.setState({
+      tData: data.list,
+      totalRow: data.totalRow
+    }, () => {
+      const { tData, currentPage: cur } = this.state;
+      if (tData && tData.length === 0 && cur > 1) {
+        this.setState(prevState => ({
+          currentPage: prevState.currentPage - 1,
+        }), () => {
+          this.getApiFeeTable();
+        });
+      }
+    })
   }
   
   render() {
@@ -50,14 +99,7 @@ class index extends Component {
                         options={filterFeeType}
                         isMulti={false}
                         placeholder="Tất cả"
-                        onChange={selectedOption => this.setState({
-                          feeType: selectedOption.value,
-                        })}
-                        value={{
-                          value: feeType,
-                          label: (feeType || 'Tất cả'),
-                        }
-                        }
+                        onChange={this.handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -101,21 +143,18 @@ class index extends Component {
                     </Col>
                     <Col lg="7">
                       <Creatable
+                        isClearable
                         options={filterFeeType}
+                        isMulti={false}
                         placeholder="Tất cả"
-                        onChange={selectedOption => this.setState({
-                          feeType: selectedOption.value,
-                        })}
-                        value={{
-                          value: feeType,
-                          label: (feeType || 'Tất cả'),
-                        }
-                        }
+                        onChange={this.handleChange}
                       />
                     </Col>
                   </FormGroup>
                   <FormGroup className="account-settings-pointer" row>
-                    <Col lg="12">
+                    <Col lg="5">
+                    </Col>
+                    <Col lg="7">
                       <Label className="permission-title">
                         <RInput
                           type="checkbox"
@@ -159,14 +198,7 @@ class index extends Component {
                         options={filterFeeType}
                         isMulti={false}
                         placeholder="Tất cả"
-                        onChange={selectedOption => this.setState({
-                          feeType: selectedOption.value,
-                        })}
-                        value={{
-                          value: feeType,
-                          label: (feeType || 'Tất cả'),
-                        }
-                        }
+                        onChange={this.handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -406,7 +438,7 @@ class index extends Component {
                   </Row>
               }
               {
-                tData && tData.length === 0 && <p>Showing 0 - 0 of 0 records</p>
+                // tData && tData.length === 0 && <p>Showing 0 - 0 of 0 records</p>
               }
             </div>
           </Form>
