@@ -5,6 +5,17 @@ export const pageOption = [
   { value: 20, label: '20' },
   { value: 50, label: '50' },
 ];
+export const getFeeType = [
+  {
+    value: '', label: 'Tất cả',
+  },
+  {
+    value: 'Fee1', label: 'Phí 1',
+  },
+  {
+    value: 'Fee2', label: 'Phí 2',
+  },
+];
 export const filterFeeType = [
   {
     value: '', label: 'Tất cả',

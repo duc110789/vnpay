@@ -10,10 +10,10 @@ export const filterFeeType = [
     value: '', label: 'Tất cả',
   },
   {
-    value: 'Fee1', label: 'Phí 1',
+    value: 'Phí trả đơn vị TT ', label: 'Phí trả đơn vị TT',
   },
   {
-    value: 'Fee2', label: 'Phí 2',
+    value: 'Phí thu MasterMerchant ', label: 'Phí thu masterMerchant',
   },
 ];
 export const filterStatus = [

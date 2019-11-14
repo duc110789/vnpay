@@ -17,7 +17,7 @@ export function callApi(endpoint, method = 'get', params, headerParams = {}) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    // Authorization: `Bearer ${Auth.getToken()}`,
+    Authorization: 'user',
     ...headerParams,
   };
 

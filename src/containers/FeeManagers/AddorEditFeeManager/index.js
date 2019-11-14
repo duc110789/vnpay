@@ -22,6 +22,7 @@ class FeeManagerList extends React.Component {
   render() {
     const { data } = this.state;
     const { changeFeeTableAdd } = this.props;
+    
     return (
       <div className="my-requests">
         <Card className="card-my-requests">
