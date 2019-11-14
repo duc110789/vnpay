@@ -79,7 +79,7 @@ const FeeTableDetail = (props) => {
                       </a>
                     </div>
                   </div>
-                  <Collapse isOpen={true} className="show-information-1">
+                  <Collapse isOpen={true} className="show-information">
                     <Card>
                       <CardBody>
                         <div className="widget-body">
