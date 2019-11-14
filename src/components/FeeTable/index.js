@@ -9,37 +9,34 @@ import Select from 'react-select';
 import { pageOption, getFeeType, DEFAULT_PERPAGE, filterFeeType } from './config';
 import Table from './Table';
 import { getFeeTables, getCacheStatusByType } from '../../apis/fee-manager';
+import { da } from 'date-fns/locale';
 
 
 class FeeTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // classifySigning: 0,
-      // feeCode: '',
       feeType: 0,
-      // status: 0,
       tData: [],
       currentPage: 1,
       perPage: DEFAULT_PERPAGE,
       totalRow: 0,
       data: {},
-      // type: ''
     };
     this.getApiFeeTable = this.getApiFeeTable.bind(this);
     this.addButtonAction = this.addButtonAction.bind(this);
     this.searchFee = this.searchFee.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.getFeeType = this.getFeeType.bind(this);
-    // this.getClassifySigning = this.getClassifySigning.bind(this);
-    // this.getFeeStatus = this.getFeeStatus.bind(this);
+    this.getClassifySigning = this.getClassifySigning.bind(this);
+    this.getFeeStatus = this.getFeeStatus.bind(this);
   }
 
   componentDidMount() {
     this.getApiFeeTable();
     this.getFeeType();
-    // this.getClassifySigning();
-    // this.getFeeStatus();
+    this.getClassifySigning();
+    this.getFeeStatus();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,47 +51,36 @@ class FeeTable extends React.Component {
   async getApiFeeTable(params = {}) {
     const { perPage, currentPage } = this.state;
     const data = await getFeeTables({
-      toRow: perPage,
-      fromRow: perPage * (currentPage - 1),
+      toRow:  currentPage*perPage,
+      fromRow: perPage*currentPage - perPage,
       ...params,
     });
     this.setState({
       tData: data.list,
       totalRow: data.totalRow
-    }, () => {
-      const { tData, currentPage: cur } = this.state;
-      if (tData && tData.length === 0 && cur > 1) {
-        this.setState(prevState => ({
-          currentPage: prevState.currentPage - 1,
-        }), () => {
-          this.getApiFeeTable();
-        });
-      }
-    })
-  }
+  })
+}
 
   async getFeeType() {
     const datas1 = await getCacheStatusByType({
-      type: 'FEE_TYPE', 
-      // type: 'FEE_STATUS'
+      type: 'FEE_TYPE',
     });
-    console.log('datas1', datas1 && datas1.list);
   }
 
-  // async getClassifySigning(params = {}) {
-  //   const datas2 = await getCacheStatusByType({
-  //     type: 'CLASSIFY_SIGNING',
-  //     ...params
-  //   });
-  // }
+  async getClassifySigning(params = {}) {
+    const datas2 = await getCacheStatusByType({
+      type: 'CLASSIFY_SIGNING',
+      ...params
+    });
+  }
 
-  // async getFeeStatus(params = {}) {
-  //   // const { type } = this.state;
-  //   const datas3 = await getCacheStatusByType({
-  //     type: 'FEE_STATUS',
-  //     ...params
-  //   });
-  // }
+  async getFeeStatus(params = {}) {
+    const datas3 = await getCacheStatusByType({
+      type: 'FEE_STATUS',
+      ...params
+    });
+    console.log('datas3', datas3.list)
+  }
 
   handlePageChange(pageNumber) {
     this.setState({ currentPage: pageNumber });
@@ -123,7 +109,7 @@ class FeeTable extends React.Component {
                 <Col lg="7">
                   <Select
                     id="LIMIT_DROPDOWN"
-                    options={console.log('getFeeType', getFeeType)}
+                    options={getFeeType}
                     placeholder="Tất cả"
                     className="select-pagination select-pagination__top"
                     menuPlacement="bottom"

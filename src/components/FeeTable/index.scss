@@ -10,6 +10,27 @@
     &__filter {
       padding-bottom: 1.25rem;
     }
+    .icon-fee {
+      i {
+        font-weight: 600;
+      }
+      .icon-info {
+        color: #4caf50;
+      }
+      .icon-note {
+        color: #0177bc;
+      }
+      .close-lock {
+        .icon-lock {
+          color: #dd5a43;
+        }
+      }
+      .open-lock {
+        .icon-lock {
+          color: #4caf50;
+        }
+      }
+    }
   }
   &__content {
     width: 100%;

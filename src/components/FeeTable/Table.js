@@ -21,26 +21,53 @@ function Table(props) {
           {
             tableData && tableData.map((data, index) => (
               <tr key={data.id}>
-                <td>{index + 1}</td>
+                <td>{data.rowNum}</td>
                 <td>{data.feeType}</td>
                 <td>{data.classifySigning}</td>
                 <td>{data.countFeeCode}</td>
-                <td>{data.status}</td>
+                <td className="fee-status">
+                  {
+                    data.status === 1 && (
+                      <span className="status-active">
+                        Hoạt động
+                      </span>
+                    ) || data.status === 2 && (
+                      <span className="status-initial">
+                        Khởi tạo
+                      </span>
+                    ) || data.status === 3 && (
+                      <span className="status-expire">
+                        Hết hạn
+                      </span>
+                    ) || data.status === -1 && (
+                      <span className="status-lock">
+                        Khóa
+                      </span>
+                    )
+                  }
+                </td>
                 <td className="icon-fee">
+                  <Button>
+                    <i className="icon-info" />
+                  </Button>
+                  {' '}
+                  <Button>
+                    <i className="icon-note" />
+                  </Button>
+                  {' '}
                   {
-                    <Button>
-                      <i className="icon-info" />
-                    </Button>
-                  }
-                  {
-                    <Button>
-                      <i className="icon-note" />
-                    </Button>
-                  }
-                  {
-                    <Button>
-                      <i className="icon-lock" />
-                    </Button>
+                    data 
+                    && data.status === 1 && (
+                      <Button className="close-lock">
+                        <i className="icon-lock" />
+                      </Button>
+                    ) ||
+                    data 
+                    && data.status === -1 && (
+                      <Button className="close-lock">
+                        <i className="icon-lock" />
+                      </Button>
+                    )
                   }
                 </td>
               </tr>
