@@ -8,9 +8,9 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './index.scss';
-import FeeTableAdd from '../../../components/FeeTableAdd';
+import FeeTableDetail from '../../../components/FeeTableDetail';
 
-class FeeManagerList extends React.Component {
+class FeeDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,8 +21,7 @@ class FeeManagerList extends React.Component {
 
   render() {
     const { data } = this.state;
-    const { changeFeeTableAdd } = this.props;
-    
+    // const { changeFeeTableAdd } = this.props;
     return (
       <div className="my-requests">
         <Card className="card-my-requests">
@@ -30,16 +29,15 @@ class FeeManagerList extends React.Component {
             <Col xs="12">
               <FormGroup style={{ marginBottom: 0 }} row>
                 <Col lg="6" style={{ paddingLeft: 0 }}>
-                  <span className="text-bold">Thêm mới</span>
+                  <span className="text-bold">Chi tiết giao dịch</span>
                 </Col>
               </FormGroup>
             </Col>
           </CardHeader>
           <CardBody>
-            <FeeTableAdd
+            <FeeTableDetail
               tHead={data.fields}
               tData={data.data}
-              changeFeeTableAdd={changeFeeTableAdd}
             />
           </CardBody>
         </Card>
@@ -48,7 +46,7 @@ class FeeManagerList extends React.Component {
   }
 }
 
-export default FeeManagerList;
-FeeManagerList.propTypes = {
+export default FeeDetail;
+FeeDetail.propTypes = {
   // changeFeeTable: PropTypes.func.isRequired,
 };

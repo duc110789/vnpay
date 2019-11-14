@@ -1,4 +1,5 @@
 import React from 'react';
+import FeeTableDetail from "./components/FeeTableDetail";
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -40,6 +41,7 @@ const AddorEditMerchantManager = React.lazy(() => import('./containers/MerchantM
 const SentMerchantManagerList = React.lazy(() => import('./containers/MerchantManagers/SentMerchantManagerList'));
 const FeeManagerList = React.lazy(() => import('./containers/FeeManagers/FeeManagerList'));
 const AddFeeManager = React.lazy(() => import('./containers/FeeManagers/AddorEditFeeManager'));
+const FeeDetail = React.lazy(() => import('./containers/FeeManagers/FeeDetail'));
 
 
 
@@ -89,7 +91,8 @@ const routes = [
   { path: '/merchant/add-edit-merchant', exact: true, name: 'Thêm mới Merchant', component: AddorEditMerchantManager},
   { path: '/merchant/sent-merchant-list', exact: true, name: 'Danh sách Merchant gửi đăng ký', component: SentMerchantManagerList},
   { path: '/fee/list', exact: true, name: 'Quản lý bảng phí', component: FeeManagerList},
-  { path: '/fee/list/add', exact: true, name: 'Add Fee', component: AddFeeManager }
+  { path: '/fee/list/add', exact: true, name: 'Add Fee', component: AddFeeManager },
+  { path: '/fee/detail/:id', exact: true, name: 'Fee Detail ', component: FeeDetail }
 ];
 
 export default routes;

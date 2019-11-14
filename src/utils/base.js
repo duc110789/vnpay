@@ -41,6 +41,19 @@ export function baseUrl(url, params = false) {
   return (`${realBaseUrl}/${url}`);
 }
 
+export function baseUrlTest(url, params = false) {
+  let realBaseUrl = 'http://localhost:6003';
+  
+  if (!realBaseUrl) {
+    realBaseUrl = '';
+  }
+  if (params) {
+    return `${realBaseUrl}/${url}?${querystring.stringify(params)}`;
+  }
+  return (`${realBaseUrl}/${url}`);
+}
+
+
 /**
  * Convert time from UTC to current timezone
  * @param {String} time Time in UTC
