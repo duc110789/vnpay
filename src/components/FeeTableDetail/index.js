@@ -1,92 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Row, Col, Collapse, FormGroup, Button, CardBody, Card } from 'reactstrap';
+
 import './index.scss';
-// import { filterFeeType, pageOption, filterStatus, DEFAULT_PERPAGE } from './config';
 
-class FeeTableDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const FeeTableDetail = (props) => {
+  
+  
+  const [isOpen, setIsOpen] = useState(true);
+  
+  const toggle = () => setIsOpen(!isOpen);
+
     
-    };
-
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  
-  }
-  
-  render(){
     return (
-      
       <div className="page-content">
         <div className="page-content-area">
-          <div className="page-header">
-            <h1>Chi tiết</h1>
-          </div>
           <form className="form-horizontal" role="form" action="1-1-DS-Merchant-gui-dang-ky.html">
             <div className="row">
               <div className="col-md-12">
                 <div className="widget-box transparent">
-                  <div className="widget-header widget-header-flat">
+                  <div className="widget-header widget-header-flat" onClick={toggle}>
                     <h4 className="widget-title lighter">LÝ DO TỪ CHỐI</h4>
                     <div className="widget-toolbar">
-                      <a href="#" data-action="collapse"> <i className="ace-icon fa fa-chevron-up" /> </a>
+                      <span data-action="collapse"> <i className="ace-icon fa fa-chevron-up" /> </span>
                     </div>
                   </div>
-                  <div className="widget-body">
-                    <div className="widget-main">
-                      <div className="box row">
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Người từ chối</label>
-                            <div className="col-sm-8">
-                              <label><b>Kế toán</b></label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Nội dung</label>
-                            <div className="col-sm-8">
-                              <label className="clred"><b>Thông tin chung không đúng</b></label>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Thời gian</label>
-                            <div className="col-sm-8">
-                              <label><b>01/01/2016 00:00:00</b></label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Chi tiết</label>
-                            <div className="col-sm-8">
-                              <label><b>Nhầm LHDN</b></label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.col */}
-                    </div>
-                    {/* /.widget-main */}
-                  </div>
-                  {/* /.widget-body */}
+                  <Collapse isOpen={isOpen} className="show-information-1">
+                    <Card>
+                      <CardBody>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup row>
+                              <Col md={4}>
+                                <label>Người từ chối</label>
+                              </Col>
+                              <Col md={8}>
+                                <label><b>Kế toán</b></label>
+                              </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                              <Col md={4}>
+                                <label>Nội dung</label>
+                              </Col>
+                              <Col md={8}>
+                                <label className="text-danger"><b>Thông tin chung không đúng</b></label>
+                              </Col>
+                            </FormGroup>
+                          </Col>
+                          <Col md={6}>
+                            <FormGroup row>
+                              <Col md={4}>
+                              <label className="p_top">Thời gian</label>
+                              </Col>
+                                <Col md={8}>
+                                <label><b>01/01/2016 00:00:00</b></label>
+                              </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                              <Col md={4}>
+                              <label>Chi tiết</label>
+                              </Col>
+                              <Col md={8}>
+                                <label><b>Nhầm LHDN</b></label>
+                              </Col>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                      </CardBody>
+                    </Card>
+                  </Collapse>
                 </div>
               </div>
               <div className="col-md-12">
-                <div className="widget-box transparent collapsed">
+                <div className="widget-box transparent">
                   <div className="widget-header widget-header-flat">
                     <h4 className="widget-title lighter">Thông tin chung</h4>
                     <div className="widget-toolbar">
                       <a href="#" data-action="collapse">
-                        <i className="ace-icon fa fa-chevron-down" />
+                        <i className="ace-icon fa fa-chevron-up" />
                       </a>
                     </div>
                   </div>
-                  <div className="widget-body" style={{display: 'none'}}>
+                  <div className="widget-body" style={{display: 'block'}}>
                     <div className="widget-main">
                       <div className="box row">
                         <div className="col-md-6">
@@ -553,7 +547,6 @@ class FeeTableDetail extends React.Component {
       </div>
     );
   }
-}
 
 export default FeeTableDetail;
 FeeTableDetail.propTypes = {
