@@ -96,7 +96,6 @@ export async function axiosCallApiFake(endpoint, method = 'get', params, headerP
   try {
     const result = await maxios(axiosSetup);
     if (result && result.data) {
-      console.log(result.data)
       return result.data;
     }
   } catch (err) {

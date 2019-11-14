@@ -33,7 +33,7 @@ class index extends Component {
     this.getApiFeeTable = this.getApiFeeTable.bind(this);
   }
   
-  handleChange(newValue: any, actionMeta: any){
+  handleChange(newValue, actionMeta){
     console.group('Value Changed');
     console.log(newValue);
     console.log(`action: ${actionMeta.action}`);
@@ -42,7 +42,6 @@ class index extends Component {
   
   componentDidMount() {
     const data = this.getApiFeeTable();
-    // console.log(data)
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -63,7 +62,7 @@ class index extends Component {
       ...params
     });
     this.setState({
-      tData: data.list,
+      tData: data.ITEMS,
       totalRow: data.totalRow
     }, () => {
       const { tData, currentPage: cur } = this.state;
@@ -80,6 +79,7 @@ class index extends Component {
   render() {
     const { tHead } = this.props;
     const { feeType, tData, perPage, currentPage, hasNext, status } = this.state;
+    console.log(tData)
     const showingOption = `Showing ${currentPage * perPage - perPage + 1} - ${(currentPage * perPage) > hasNext  ? hasNext : (currentPage * perPage)} of ${hasNext} records`
     return (
       <div className="animated fadeIn">
