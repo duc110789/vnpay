@@ -24,7 +24,7 @@ const FeeTableDetail = (props) => {
                       <span data-action="collapse"> <i className="ace-icon fa fa-chevron-up" /> </span>
                     </div>
                   </div>
-                  <Collapse isOpen={isOpen} className="show-information-1">
+                  <Collapse isOpen={isOpen} className="show-information">
                     <Card>
                       <CardBody>
                         <div className="widget-body">
@@ -79,7 +79,7 @@ const FeeTableDetail = (props) => {
                       </a>
                     </div>
                   </div>
-                  <Collapse isOpen={isOpen} className="show-information-1">
+                  <Collapse isOpen={true} className="show-information-1">
                     <Card>
                       <CardBody>
                         <div className="widget-body">
