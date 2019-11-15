@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Collapse, FormGroup, Button, CardBody, Card } from 'reactstrap';
+import { Collapse, CardBody, Card } from 'reactstrap';
 
 import './index.scss';
 
@@ -14,7 +14,7 @@ const FeeTableDetail = (props) => {
     return (
       <div className="page-content">
         <div className="page-content-area">
-          <form className="form-horizontal" role="form" action="1-1-DS-Merchant-gui-dang-ky.html">
+          <form className="form-horizontal" role="form" action="#">
             <div className="row">
               <div className="col-md-12">
                 <div className="widget-box transparent">
@@ -24,47 +24,46 @@ const FeeTableDetail = (props) => {
                       <span data-action="collapse"> <i className="ace-icon fa fa-chevron-up" /> </span>
                     </div>
                   </div>
-                  <Collapse isOpen={isOpen} className="show-information-1">
+                  <Collapse isOpen={isOpen} className="show-information">
                     <Card>
                       <CardBody>
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup row>
-                              <Col md={4}>
-                                <label>Người từ chối</label>
-                              </Col>
-                              <Col md={8}>
-                                <label><b>Kế toán</b></label>
-                              </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                              <Col md={4}>
-                                <label>Nội dung</label>
-                              </Col>
-                              <Col md={8}>
-                                <label className="text-danger"><b>Thông tin chung không đúng</b></label>
-                              </Col>
-                            </FormGroup>
-                          </Col>
-                          <Col md={6}>
-                            <FormGroup row>
-                              <Col md={4}>
-                              <label className="p_top">Thời gian</label>
-                              </Col>
-                                <Col md={8}>
-                                <label><b>01/01/2016 00:00:00</b></label>
-                              </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                              <Col md={4}>
-                              <label>Chi tiết</label>
-                              </Col>
-                              <Col md={8}>
-                                <label><b>Nhầm LHDN</b></label>
-                              </Col>
-                            </FormGroup>
-                          </Col>
-                        </Row>
+                        <div className="widget-body">
+                          <div className="widget-main">
+                            <div className="box row">
+                              <div className="col-md-6">
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Người từ chối</label>
+                                  <div className="col-sm-8">
+                                    <label><b>Kế toán</b></label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Nội dung</label>
+                                  <div className="col-sm-8">
+                                    <label className="clred"><b>Thông tin chung không đúng</b></label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Thời gian</label>
+                                  <div className="col-sm-8">
+                                    <label><b>01/01/2016 00:00:00</b></label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Chi tiết</label>
+                                  <div className="col-sm-8">
+                                    <label><b>Nhầm LHDN</b></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            {/* /.col */}
+                          </div>
+                          {/* /.widget-main */}
+                        </div>
+                        {/* /.widget-body */}
                       </CardBody>
                     </Card>
                   </Collapse>
@@ -80,170 +79,176 @@ const FeeTableDetail = (props) => {
                       </a>
                     </div>
                   </div>
-                  <div className="widget-body" style={{display: 'block'}}>
-                    <div className="widget-main">
-                      <div className="box row">
-                        <div className="col-md-6">
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Loại phí</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>Phí thu merchant</b>
-                              </label>
+                  <Collapse isOpen={true} className="show-information">
+                    <Card>
+                      <CardBody>
+                        <div className="widget-body">
+                          <div className="widget-main">
+                            <div className="box row">
+                              <div className="col-md-6">
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Loại phí</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>Phí thu merchant</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Phân loại ký kết</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>Hợp đồng</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Số lượng mức phí</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>3</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Trạng thái</label>
+                                  <div className="col-sm-8">
+                                    <label className="label label-sm label-success">
+                                      <b>Hoạt động</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Người tạo</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>Lapnv</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Người chỉnh sửa</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>Lapnv</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Thời gian tạo</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>20/09/2018 09:00:00</b>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="form-group">
+                                  <label className="col-sm-4 control-label p_top">Thời gian chỉnh sửa</label>
+                                  <div className="col-sm-8">
+                                    <label>
+                                      <b>20/09/2018 09:00:00</b>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-md-6">
+                                <div className="row">
+                                  <div className="col-md-5">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Người duyệt</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>admin</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-7">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Thời gian duyệt</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>20/09/2018 09:00:00</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-md-5">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Người khóa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>admin</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-7">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Thời gian khóa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>20/09/2018 09:00:00</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-md-5">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Người mở khóa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>admin</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-7">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Thời gian mở khóa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>20/09/2018 09:00:00</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-md-5">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Người chỉnh sửa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>admin</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-7">
+                                    <div className="form-group">
+                                      <label className="col-sm-5 control-label p_top">Thời gian chỉnh sửa</label>
+                                      <div className="col-sm-7">
+                                        <label>
+                                          <b>20/09/2018 09:00:00</b>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
+                            {/* /.col */}
                           </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Phân loại ký kết</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>Hợp đồng</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Số lượng mức phí</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>3</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Trạng thái</label>
-                            <div className="col-sm-8">
-                              <label className="label label-sm label-success">
-                                <b>Hoạt động</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Người tạo</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>Lapnv</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Người chỉnh sửa</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>Lapnv</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Thời gian tạo</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>20/09/2018 09:00:00</b>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label className="col-sm-4 control-label p_top">Thời gian chỉnh sửa</label>
-                            <div className="col-sm-8">
-                              <label>
-                                <b>20/09/2018 09:00:00</b>
-                              </label>
-                            </div>
-                          </div>
+                          {/* /.widget-main */}
                         </div>
-                        <div className="col-md-6">
-                          <div className="row">
-                            <div className="col-md-5">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Người duyệt</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>admin</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-7">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Thời gian duyệt</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>20/09/2018 09:00:00</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-md-5">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Người khóa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>admin</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-7">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Thời gian khóa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>20/09/2018 09:00:00</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-md-5">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Người mở khóa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>admin</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-7">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Thời gian mở khóa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>20/09/2018 09:00:00</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-md-5">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Người chỉnh sửa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>admin</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-md-7">
-                              <div className="form-group">
-                                <label className="col-sm-5 control-label p_top">Thời gian chỉnh sửa</label>
-                                <div className="col-sm-7">
-                                  <label>
-                                    <b>20/09/2018 09:00:00</b>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* /.col */}
-                    </div>
-                    {/* /.widget-main */}
-                  </div>
+                      </CardBody>
+                    </Card>
+                  </Collapse>
                   {/* /.widget-body */}
                 </div>
                 <div className="clearfix">
